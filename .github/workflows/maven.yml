@@ -16,7 +16,7 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-    - run: mvn -B -DskipTests clean packag
+    - run: mvn -B -DskipTests clean package
     - run: mvn test
     - run: mkdir staging && cp target/*.jar staging && cp target/surefire-reports/*.xml staging 
     - uses: actions/upload-artifact@v3
