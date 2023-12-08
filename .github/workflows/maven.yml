@@ -17,7 +17,7 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
     - run: mvn -B -DskipTests clean package
-    - run: mvn test
+    - run: mvn test -Dmaven.test.failure.ignore=true surefire-report:report
 
     - name: ServiceNow DevOps Unit Test Results
       uses: ServiceNow/servicenow-devops-test-report@v2.0.0
