@@ -5,9 +5,8 @@ on:
     branches: [ "master", "develop","feature-createchange" ]
   pull_request:
     branches: [ "master", "develop", "feature-createchange"]
-
-jobs: 
-  publish-job:
+jobs:
+   publish-job:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -15,8 +14,8 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-    - run: mvn -B -DskipTests clean package
-    - run: mvn test -Dmaven.test.failure.ignore=true surefire-report:report
+    - run: mvn --batch-mode --update-snapshots verify
+    - run: mkdir staging && cp target/*.jar staging
     - uses: actions/upload-artifact@v3
       with:
         name: Package
