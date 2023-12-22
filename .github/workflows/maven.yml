@@ -6,7 +6,6 @@ on:
   pull_request:
     branches: [ "master", "develop", "feature-createchange"]
 
-
 jobs: 
   publish-job:
     runs-on: ubuntu-latest
@@ -16,5 +15,10 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-    - run: mvn -B -DskipTests clean package
- 
+    - run: mvn -B -DskipTests clean packag
+    - run: mvn test -Dmaven.test.failure.ignore=true surefire-report:report
+    - run: mkdir staging && cp target/*.jar staging && cp target/surefire-reports/*.xml staging 
+    - uses: actions/upload-artifact@v3
+      with:
+        name: Package
+        path: staging
