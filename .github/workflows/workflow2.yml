@@ -21,7 +21,7 @@ jobs:
       - name: Download
         uses: ./
         with:
-          workflow: maven.yml
+          workflow: workflow1.yml
           name: artifact
           path: artifact
       - name: Test
